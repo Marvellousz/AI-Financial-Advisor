@@ -1,23 +1,39 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import ChatList from './components/ChatList';
+import ChatInput from './components/ChatInput';
+import Dashboard from './Dashboard';
 
 function App() {
+  const [inputText, setInputText] = useState('');
+  const [chats, setChats] = useState([]);
+
+  const handleInputChange = (e) => {
+    setInputText(e.target.value);
+  };
+
+  const handleSendMessage = () => {
+    if (inputText.trim() !== '') {
+      setChats([...chats, { id: chats.length, text: inputText }]);
+      setInputText('');
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="flex flex-col h-screen">
+      <Header />
+      <div className="flex flex-grow">
+        <ChatList chats={chats} />
+        <ChatInput
+          inputText={inputText}
+          handleInputChange={handleInputChange}
+          handleSendMessage={handleSendMessage}
+        />
+        <Dashboard />
+      </div>
+      <Footer />
     </div>
   );
 }
