@@ -46,7 +46,7 @@ class ApexChart extends React.Component {
     }
   }
 
-  const domContainer = document.querySelector('#app');
-  ReactDOM.render(React.createElement(ApexChart), domContainer);
+  // const domContainer = document.querySelector('#app');
+  // ReactDOM.render(React.createElement(ApexChart), domContainer);
 
 export default ApexChart;
