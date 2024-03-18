@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
+import ReactDOM from "react-dom/client";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './App.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import ChatList from './components/ChatList';
-import ChatInput from './components/ChatInput';
+import ChatList from './components/ChatList'; // Assuming ChatList doesn't require routing
+import ChatInput from './components/ChatInput'; // Assuming ChatInput doesn't require routing
 import Dashboard from './Dashboard';
+import Home from './Home';
+import Form from './Form';
 
 function App() {
   const [inputText, setInputText] = useState('');
@@ -22,19 +26,21 @@ function App() {
   };
 
   return (
-    <div className="flex flex-col h-screen">
-      <Header />
-      <div className="flex flex-grow">
+    <Router>
+      <Routes>
+        <Route exact path="/" element={<Home />} />
+        <Route path="/form" element={<Form />} /> 
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Routes>
+      {/* <div className="chat-container"> 
         <ChatList chats={chats} />
         <ChatInput
           inputText={inputText}
           handleInputChange={handleInputChange}
           handleSendMessage={handleSendMessage}
         />
-        <Dashboard />
-      </div>
-      <Footer />
-    </div>
+      </div> */} 
+    </Router>
   );
 }
 
