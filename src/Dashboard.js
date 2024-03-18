@@ -13,7 +13,7 @@ export default function Dashboard() {
         <Dash />
         <ApexChart />
         <ChatInput />
-        <Footer style="margin-top: 178px;" />
+        <Footer />
         </div>
     );
 }

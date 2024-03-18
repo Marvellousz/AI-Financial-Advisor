@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import Header from "./components/Header"
+import Footer from "./components/Footer"
 
 const questions = [
   {
@@ -53,49 +55,63 @@ function InvestmentSurveyForm() {
   const [answers, setAnswers] = useState({});
 
   const getQuestionByIndex = (index) => {
-    return questions[index - 1] || null; // Handle potential out-of-bounds access
+    return questions[index - 1] || null;
   };
 
   const handleOptionChange = (optionIndex) => {
-    setAnswers({ ...answers, [currentQuestion + 1]: optionIndex + 1 }); // +1 for question indexing
+    setAnswers({ ...answers, [currentQuestion + 1]: optionIndex + 1 });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-      setCurrentQuestion(currentQuestion + 1);
-      return;
-    
-    
+    setCurrentQuestion(currentQuestion + 1);
+
     // Form submission logic (e.g., send answers to server)
     console.log('Submitted answers:', answers);
   };
 
   const renderQuestion = () => {
-    const question = getQuestionByIndex(currentQuestion + 1); // +1 for question indexing
-    if (!question) return null; // Handle missing question
+    const question = getQuestionByIndex(currentQuestion + 1);
+    if (!question) return null;
 
     return (
-      <div key={question.question}>
-        <h3>{question.question}</h3>
-        <form onSubmit={handleSubmit}>
-          {question.options.map((option, index) => (
-            <div key={index}>
-              <input
-                type="radio"
-                id={option}
-                name="answer"
-                value={index + 1} // +1 for option indexing
-                onChange={() => handleOptionChange(index)}
-                checked={answers[currentQuestion + 1] === index + 1} // +1 for question indexing
-              />
-              <label htmlFor={option}>{option}</label>
-            </div>
-          ))}
-          <button type="submit" disabled={!answers[currentQuestion + 1]}>
-            {currentQuestion === questions.length - 1 ? 'Submit' : 'Next'}
-          </button>
-        </form>
+      <div>
+      <Header />
+      <div className="container mx-auto px-4 py-8 bg-gray-100 rounded-lg shadow-md">
+        <div key={question.question}>
+          <h3 className="text-xl font-medium mb-4">{question.question}</h3>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            {question.options.map((option, index) => (
+              <div key={index} className="flex items-center mb-2">
+                <input
+                  type="radio"
+                  id={option}
+                  name="answer"
+                  value={index + 1}
+                  onChange={() => handleOptionChange(index)}
+                  checked={answers[currentQuestion + 1] === index + 1}
+                  className="mr-2 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                />
+                <label htmlFor={option} className="text-gray-700">
+                  {option}
+                </label>
+              </div>
+            ))}
+            <button
+              type="submit"
+              disabled={!answers[currentQuestion + 1]}
+              className={`px-4 py-2 rounded-md text-white ${
+                !answers[currentQuestion + 1]
+                  ? 'bg-gray-400 cursor-not-allowed'
+                  : 'bg-indigo-600 hover:bg-indigo-700 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+              }`}
+            >
+              {currentQuestion === questions.length - 1 ? 'Submit' : 'Next'}
+            </button>
+          </form>
+        </div>
       </div>
+    </div>
     );
   };
 
