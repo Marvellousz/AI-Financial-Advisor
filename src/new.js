@@ -12,7 +12,7 @@
 // import axios from 'axios';
 
 // function App() {
-
+ 
 //   const [inputText, setInputText] = useState('');
 //   const [chats, setChats] = useState([]);
 //   const [calculate,setCalculate] = useState([])
@@ -39,7 +39,7 @@
 //   const handleSubmit = async () => {
 //     const input = "counter1";
 //     console.log(data);
-
+  
 //     try {
 //       const response = await axios.post('http://192.168.197.222:5000/do', JSON.stringify(data), {
 //         headers: {
@@ -68,43 +68,42 @@
 //     <Router>
 //       <Routes>
 //         <Route exact path="/" element={<Home />} />
-//         <Route path="/form" element={<Form calculate={calculate} setCalculate={setCalculate}/>} />
+//         <Route path="/form" element={<Form calculate={calculate} setCalculate={setCalculate}/>} /> 
 //         <Route path="/dashboard" element={<Dashboard calculate={calculate} setCalculate={setCalculate}/>} />
 //       </Routes>
-//       {/* <div className="chat-container">
+//       {/* <div className="chat-container"> 
 //         <ChatList chats={chats} />
 //         <ChatInput
 //           inputText={inputText}
 //           handleInputChange={handleInputChange}
 //           handleSendMessage={handleSendMessage}
 //         />
-//       </div> */}
+//       </div> */} 
 //     </Router>
 //   );
 // }
 
 // export default App;
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import "./App.css";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import ChatList from "./components/ChatList"; // Assuming ChatList doesn't require routing
-import ChatInput from "./components/ChatInput"; // Assuming ChatInput doesn't require routing
-import Dashboard from "./Dashboard";
-import Home from "./Home";
-import Form from "./Form";
-import axios from "axios";
-import Print from "./Print";
-import ApexChart1 from "./components/Donut";
+import './App.css';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import ChatList from './components/ChatList'; // Assuming ChatList doesn't require routing
+import ChatInput from './components/ChatInput'; // Assuming ChatInput doesn't require routing
+import Dashboard from './Dashboard';
+import Home from './Home';
+import Form from './Form';
+import axios from 'axios';
 
 function App() {
-  const [inputText, setInputText] = useState("");
+ 
+  const [inputText, setInputText] = useState('');
   const [chats, setChats] = useState([]);
-  const [calculate, setCalculate] = useState([]);
-  const [check, setCheck] = useState(false);
+  const [calculate,setCalculate] = useState([])
+  const [check,setCheck] = useState(false)
   const [qns, setQns] = useState({
     0: 10,
     1: 11,
@@ -118,8 +117,8 @@ function App() {
     9: 19,
   });
   const [responseData, setResponseData] = useState(null);
-  const data = { calculate };
-
+  const data = {calculate};
+ 
   const [error, setError] = useState(null);
   useEffect(() => {
     handleSubmit();
@@ -128,19 +127,14 @@ function App() {
   const handleSubmit = async () => {
     const input = "counter1";
     console.log(data);
-
+  
     try {
-      const response = await axios
-        .post("http://192.168.197.222:5000/do", JSON.stringify(data), {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-        .then((response) => {
-          console.log(response.data);
-          setResponseData(JSON.stringify(response.data));
-        });
-      // setResponseData(response.data);
+      const response = await axios.post('http://192.168.197.222:5000/do', JSON.stringify(data), {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      setResponseData(response.data);
     } catch (error) {
       setError(error);
       console.error(error); // For debugging purposes
@@ -152,9 +146,9 @@ function App() {
   };
 
   const handleSendMessage = () => {
-    if (inputText.trim() !== "") {
+    if (inputText.trim() !== '') {
       setChats([...chats, { id: chats.length, text: inputText }]);
-      setInputText("");
+      setInputText('');
     }
   };
 
@@ -162,26 +156,8 @@ function App() {
     <Router>
       <Routes>
         <Route exact path="/" element={<Home />} />
-        <Route
-          path="/form"
-          element={
-            <Form
-              calculate={calculate}
-              setCalculate={setCalculate}
-              responseData={responseData}
-            />
-          }
-        />
-        <Route
-          path="/dashboard"
-          element={
-            <Dashboard calculate={calculate} setCalculate={setCalculate} />
-          }
-        />
-        <Route path="/Print" element={<Print value={responseData} />} />
-        {/* <Route>
-        {responseData && <ApexChart1 values={responseData} />}
-        </Route> */}
+        <Route path="/form" element={<Form calculate={calculate} setCalculate={setCalculate}/>} /> 
+        <Route path="/dashboard" element={<Dashboard calculate={calculate} setCalculate={setCalculate}/>} />
       </Routes>
       {/* <div className="chat-container"> 
         <ChatList chats={chats} />
@@ -190,7 +166,7 @@ function App() {
           handleInputChange={handleInputChange}
           handleSendMessage={handleSendMessage}
         />
-      </div> */}
+      </div> */} 
     </Router>
   );
 }

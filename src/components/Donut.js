@@ -5,9 +5,9 @@ import ReactDOM from 'react-dom'
 class ApexChart1 extends React.Component {
     constructor(props) {
       super(props);
-
-      this.state = {
       
+      this.state = {
+        
         series: [44, 55, 41, 17, 15],
         options: {
           chart: {
@@ -26,8 +26,8 @@ class ApexChart1 extends React.Component {
             }
           }]
         },
-      
-      
+        
+        
       };
     }
 
@@ -36,6 +36,7 @@ class ApexChart1 extends React.Component {
     render() {
       return (
         <div>
+          {/* {console.log('sfgsdffffffffffgdf',this.props.values)} */}
           <div id="chart" >
             <ReactApexChart options={this.state.options} series={this.state.series} type="donut" width={380}/>
           </div>

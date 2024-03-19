@@ -8,14 +8,15 @@ import ChatInput from "./components/ChatInput";
 import ChatList from "./components/ChatList";
 import Dash from "./components/Dash"
 
-export default function Dashboard() {
+
+export default function Dashboard(props) {
     return (
         <div>
+            {/* {console.log('sfgsdffffffffffgdf',JSON.parse(props.responseData))} */}
         <Header />
         <Dash />
-        <ApexChart />
-        <ApexChart1 />
-        <ApexChart2 />
+        <ApexChart1 values={props.responseData}/>
+        <ApexChart2 values={props.responseData}/>
         <ChatInput />
         <Footer />
         </div>
